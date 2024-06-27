@@ -6,4 +6,3 @@ matplotlib
 tensorflow
 scikit-learn
 seaborn
-pickle
