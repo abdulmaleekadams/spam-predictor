@@ -5,7 +5,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # Load the saved model, tokenizer, and label encoder
-model = load_model('spam_detector_model.keras')
+model = load_model('spam_detector_model.keras', compile=False)
 
 with open('tokenizer.pkl', 'rb') as tokenizer_file:
     tokenizer = pickle.load(tokenizer_file)
@@ -14,7 +14,7 @@ with open('label_encoder.pkl', 'rb') as encoder_file:
     label_encoder = pickle.load(encoder_file)
 
 # Define the maximum sequence length (same as used during training)
-max_length = 100  # Update this if max_length was set differently
+max_length = 500  # Update this if max_length was set differently
 
 # Function to preprocess and predict spam
 def predict_spam(email_text):
