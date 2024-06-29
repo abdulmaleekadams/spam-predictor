@@ -5,7 +5,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # Load the saved model, tokenizer, and label encoder
-model = load_model('spam_detector_model.keras', compile=False)
+model = load_model('spam_detector_model.h5')
 
 with open('tokenizer.pkl', 'rb') as tokenizer_file:
     tokenizer = pickle.load(tokenizer_file)
