@@ -1,10 +1,7 @@
-from typing import Union
-
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 import pickle
-import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
