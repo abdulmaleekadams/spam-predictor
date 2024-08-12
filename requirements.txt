@@ -1,7 +1,6 @@
+fastapi
+numpy
+scikit-learn
 numpy
 pandas
-nltk
-matplotlib
 tensorflow
-scikit-learn
-seaborn
