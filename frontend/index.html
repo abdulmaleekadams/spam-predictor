@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mail Spam Predictor</title>
+    <link rel="stylesheet" href="/static/style/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Mail Spam Predictor</h1>
+
+      <div class="inputarea">
+        <textarea id="mail" placeholder="Enter your mail text"></textarea>
+        <button id="predict">Predict</button>
+      </div>
+
+      <!-- Div to display the prediction result -->
+      <div id="result" class="prediction"></div>
+    </div>
+  </body>
+  <script>
+    const predictBtn = document.getElementById("predict");
+    const textarea = document.getElementById("mail");
+    const resultDiv = document.getElementById("result");
+
+    const handlePredict = () => {
+      // Disable the button to prevent multiple clicks
+      predictBtn.disabled = true;
+
+      // Update the raw request payload just before sending it
+      const raw = JSON.stringify({
+        email_text: textarea.value, // Get the current value from the textarea
+      });
+
+      fetch("http://127.0.0.1:8000/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: raw,
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          // Display the result in the resultDiv
+          resultDiv.textContent = `Prediction: ${result.prediction}`;
+
+          // Re-enable the button after the request is completed
+          predictBtn.disabled = false;
+        })
+        .catch((error) => {
+          console.error(error);
+
+          // Display error message
+          resultDiv.textContent = "An error occurred. Please try again.";
+
+          // Re-enable the button even if there's an error
+          predictBtn.disabled = false;
+        });
+    };
+
+    predictBtn.addEventListener("click", handlePredict);
+  </script>
+</html>
